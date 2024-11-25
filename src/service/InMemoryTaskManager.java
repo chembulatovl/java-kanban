@@ -141,7 +141,7 @@ public class InMemoryTaskManager implements TaskManager {
             updateEpicStatus(epicId);
             historyManager.removeFromHistory(id);
         } else {
-            System.out.println("Такой подзадачи не существует");
+            System.out.println("Подзадачи с ID " + id + " не существует.");
         }
     }
 

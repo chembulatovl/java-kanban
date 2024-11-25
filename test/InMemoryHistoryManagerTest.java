@@ -142,14 +142,18 @@ public class InMemoryHistoryManagerTest {
         historyManager.addInHistory(epic);
         historyManager.addInHistory(subtask1);
         historyManager.addInHistory(subtask2);
-        System.out.println("Состояние истории до удаления: " + historyManager.getHistory());
-        System.out.println("ID подзадач в эпике перед удалением: " + epic.getSubtaskIds());
+
+        System.out.println(String.format("Состояние истории до удаления: %s", historyManager.getHistory()));
+        System.out.println(String.format("ID подзадач в эпике перед удалением: %s", epic.getSubtaskIds()));
+
         taskManager.deleteSubtaskById(subtask1.getId());
         taskManager.deleteSubtaskById(subtask2.getId());
 
         List<Task> history = historyManager.getHistory();
-        System.out.println("Состояние истории после удаления: " + historyManager.getHistory());
-        System.out.println("ID подзадач в эпике после удалением: " + epic.getSubtaskIds());
+
+        System.out.println(String.format("Состояние истории после удаления: %s", historyManager.getHistory()));
+        System.out.println(String.format("ID подзадач в эпике после удаления: %s", epic.getSubtaskIds()));
+
         Assertions.assertEquals(1, history.size(), "Должен быть остаться только 1 эпик");
         Assertions.assertTrue(history.contains(epic), "Эпик должен быть в истории");
         Assertions.assertFalse(history.contains(subtask1), "Подзадача_1 не должна содержаться в истории");
