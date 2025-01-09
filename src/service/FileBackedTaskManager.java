@@ -15,18 +15,15 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     private String toString(Task task) {
-        return task.getId() + "," + task.getType() + "," + task.getTitle() + "," + task.getStatus() +
-                "," + task.getDescription();
+        return String.format("%d,%s,%s,%s,%s",task.getId(),task.getType(),task.getTitle(),task.getStatus(), task.getDescription());
     }
 
     private String toString(Epic epic) {
-        return epic.getId() + "," + epic.getType() + "," + epic.getTitle() + "," + epic.getStatus() +
-                "," + epic.getDescription();
+        return String.format("%d,%s,%s,%s,%s",epic.getId(),epic.getType(),epic.getTitle(),epic.getStatus(),epic.getDescription());
     }
 
     private String toString(Subtask subtask) {
-        return subtask.getId() + "," + subtask.getType() + "," + subtask.getTitle() + "," + subtask.getStatus() +
-                "," + subtask.getDescription() + "," + subtask.getEpicId();
+        return String.format("%d,%s,%s,%s,%s,%d",subtask.getId(),subtask.getType(),subtask.getTitle(),subtask.getStatus(),subtask.getDescription(),subtask.getEpicId());
     }
 
     private void save() {
