@@ -7,7 +7,10 @@ import org.junit.jupiter.api.Test;
 import service.HistoryManager;
 import service.Managers;
 import service.TaskManager;
-
+import model.TaskStatus;
+import service.InMemoryTaskManager;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class InMemoryTaskManagerTest {
 
@@ -271,4 +274,27 @@ class InMemoryTaskManagerTest {
         Assertions.assertEquals(task.getId(), checkedTask.getId());
         Assertions.assertEquals(task, checkedTask, "Задачи не равны");
     }
+    @Test
+    public void createSubtaskWithNonExistentEpic() {
+        InMemoryTaskManager taskManager = new InMemoryTaskManager();
+
+        Subtask subtask = new Subtask("Подзадача", "Описание подзадачи", 1, TaskStatus.NEW, 55);
+
+        taskManager.createSubtask(subtask);
+
+        assertNull(taskManager.getSubtasksByEpicId(1));
+    }
+
+    @Test
+    public void createSubtaskWithExistentEpic() {
+        InMemoryTaskManager taskManager = new InMemoryTaskManager();
+
+        Epic epic = new Epic("Эпик", "Описание эпика", 1, TaskStatus.NEW);
+        taskManager.createEpic(epic);
+        Subtask subtask = new Subtask("Подзадача", "Описание подзадачи", 2, TaskStatus.NEW, 1);
+        taskManager.createSubtask(subtask);
+
+        assertNotNull(taskManager.getSubtasksByEpicId(1));
+    }
+
 }

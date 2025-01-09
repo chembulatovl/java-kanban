@@ -15,6 +15,16 @@ public class Epic extends Task {
         return new ArrayList<>(subtaskIds);
     }
 
+    public Epic(String title, String description, int id, TaskStatus status) {
+        super(title, description, id, status);
+    }
+
+    public TaskType getType() {
+        return TaskType.EPIC;
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
