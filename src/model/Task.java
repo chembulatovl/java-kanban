@@ -112,9 +112,6 @@ public class Task {
     }
 
     public String getEndTimeToString() {
-        if (startTime == null) {
-            return "null";
-        }
         return getEndTime().format(DATE_TIME_FORMATTER);
     }
 
