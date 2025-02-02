@@ -41,7 +41,7 @@ public class EpicsHandler extends BaseHttpHandler implements HttpHandler {
         String[] parts = path.split("/");
 
         if (parts.length != 3) {
-            sendNotFoundResponse(exchange, "Неверный путь " + path + ".");
+            sendNotFoundResponse(exchange, String.format("Неверный путь %s.", path));
             return;
         }
 
@@ -52,7 +52,7 @@ public class EpicsHandler extends BaseHttpHandler implements HttpHandler {
             if (epic != null) {
                 sendOkResponse(exchange, gson.toJson(epic));
             } else {
-                sendNotFoundResponse(exchange, "Эпик с id " + id + " не найден.");
+                sendNotFoundResponse(exchange, String.format("Эпик с id %d не найден.", id));
             }
         } catch (NumberFormatException e) {
             sendNotFoundResponse(exchange, "Неверное значение id эпика.");
@@ -64,7 +64,7 @@ public class EpicsHandler extends BaseHttpHandler implements HttpHandler {
         String[] parts = path.split("/");
 
         if (parts.length != 4) {
-            sendNotFoundResponse(exchange, "Неверный путь.");
+            sendNotFoundResponse(exchange, String.format("Неверный путь: %s.", path));
             return;
         }
 
@@ -74,7 +74,7 @@ public class EpicsHandler extends BaseHttpHandler implements HttpHandler {
             List<Subtask> subtasks = taskManager.getSubtasksByEpicId(epicId);
             sendOkResponse(exchange, gson.toJson(subtasks));
         } catch (NumberFormatException e) {
-            sendNotFoundResponse(exchange, "Неверное значение id эпика");
+            sendNotFoundResponse(exchange, String.format("Неверное значение id эпика: %s.", parts[2]));
         }
     }
 
